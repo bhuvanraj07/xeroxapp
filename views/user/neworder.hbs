@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Order</title>
+</head>
+
+<body class="bg-light" onload="loader()">
+
+    <div class="account-pages my-5 pt-sm-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card overflow-hidden">
+                        <div class="bg-white bg-soft">
+                            <div class="row">
+                                <div class="col-7">
+                                    <div class="text-primary p-4">
+                                        <h5 class="text-primary">Order Now</h5>
+                                        <p>Enter the details below</p>
+                                    </div>
+                                </div>
+                                <div class="col-5 align-self-end">
+                                    <img src="../assets/home_page_img.jpg" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="p-2">
+                                <form class="form-horizontal" action="/auth/createneworder" method="POST">
+                                    <div class="mb-3">
+                                        <label for="store_id" class="form-label">store</label>
+                                        <br>
+                                        <select name="store_id" id="store_id"
+                                            class="js-example-basic-single form-control" style="width:100%">
+                                            {{#each storedetails}}
+                                            <option value="{{this.store_id}}">{{this.store_name}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="document_link" class="form-label">Link</label>
+                                        <input type="text" class="form-control" id="document_link" name="document_link"
+                                            placeholder="Enter the file link" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="no_of_copies" class="form-label">No of copies</label>
+                                        <input type="number" class="form-control" id="no_of_copies" name="no_of_copies"
+                                            placeholder="Enter no of copies" onkeyup="calculate()">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="pages" class="form-label">No of pages</label>
+                                        <input type="number" class="form-control" id="pages" name="pages"
+                                            placeholder="Enter no of pages per copy" onkeyup="calculate()">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="comments" class="form-label">Comments</label>
+                                        <textarea class="form-control" id="comments" name="comments"
+                                            placeholder="Enter your comments here" rows="2" cols="50"></textarea>
+
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="pick_up_time" class="form-label">Pick up time</label>
+                                        <input type="time" class="form-control" id="pick_up_time" name="pick_up_time"
+                                            placeholder="Enter pick up time">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="payment_amount" class="form-label">Total Cost</label>
+                                        <input type="number" class="form-control" id="payment_amount"
+                                            name="payment_amount" readonly required>
+                                    </div>
+
+                                    {{!-- <div class="mb-3"> --}}
+                                        {{!-- <label for="customer_user_id" class="form-label">Email</label> --}}
+                                        <input type="text" class="form-control" id="customer_user_id"
+                                            name="customer_user_id" readonly hidden required>
+
+                                        {{!--
+                                    </div> --}}
+
+                                    <div class="mt-3 d-grid">
+                                        <button class="btn btn-primary waves-effect waves-light"
+                                            type="submit">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- <div class="mt-5 text-center">
+
+                        <div>
+                            <p>Already have an account ? <a href="../login/user_login.html"
+                                    class="fw-medium text-primary"> Signin
+                                </a> </p>
+
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+</body>
+
+<script>
+    $(document).ready(function () {
+        $('.js-example-basic-single').select2();
+    });
+
+    function loader() {
+        let student_email = localStorage.getItem("cust_email");
+        document.getElementById("customer_user_id").value = student_email;
+    }
+
+    function calculate() {
+        let no_of_copies = document.getElementById("no_of_copies").value;
+        let no_of_pages = document.getElementById("pages").value;
+
+
+        if (no_of_copies != null && no_of_pages != null) {
+            let cost = no_of_copies * no_of_pages;
+            document.getElementById("payment_amount").value = cost;
+
+        }
+    }
+
+
+</script>
+
+</html>

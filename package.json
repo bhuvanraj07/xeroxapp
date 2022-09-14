@@ -1,0 +1,35 @@
+{
+  "name": "xeroxapp_backend",
+  "version": "1.0.0",
+  "description": "Coming soon!!!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hariharan54/xeroxapp_backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hariharan54/xeroxapp_backend/issues"
+  },
+  "homepage": "https://github.com/hariharan54/xeroxapp_backend#readme",
+  "dependencies": {
+    "argon": "^2.0.21",
+    "argon2": "^0.28.3",
+    "body-parser": "^1.19.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^11.0.0",
+    "express": "^4.17.2",
+    "hbs": "^4.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
+    "sequelize": "^6.13.0"
+  }
+}

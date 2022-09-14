@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .bottom-right {
+            position: absolute;
+            bottom: 5%;
+            right: 5%;
+
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+</head>
+
+<body class="bg-light" onload="loadlocalstorage('{{customerObj.email_id}}')">
+
+    <div class="account-pages my-5 pt-sm-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card overflow-hidden">
+                        <div class="bg-white bg-soft">
+                            <div class="row">
+                                <div class="col-12 pt-3">
+                                    <h2 align="center">Dashboard</h2>
+                                    {{!-- <h2 align="center">{{customerObj.email_id}}</h2> --}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body pt-3">
+                            <table class="table table-success table-striped table-hover">
+                                <thead>
+                                    <th>Store Name</th>
+                                    <th>Print Status</th>
+                                    <th>Amount</th>
+                                    <th>Payment</th>
+                                    {{!-- <th>Pay Now</th> --}}
+                                </thead>
+                                <tbody>
+
+                                    {{#each customerorders}}
+                                    <tr>
+                                        <td>{{this.store_name}}</td>
+                                        <td>{{this.print_status}}</td>
+                                        <td>{{this.payment_amount}}</td>
+                                        <td><a href="/auth/payment/{{this.print_id}}"><i style="color:#2F9FD4"
+                                                    class="fas fa-long-arrow-right btn"></i></a></td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {{!-- <i class="fas fa-plus-circle fa-3x bottom-right btn" style="color:#2F9FD4"><a
+            href="/auth/neworder">dfsdf</a></i> --}}
+
+    <a href="/auth/neworder"><i style="color:#2F9FD4" class="fas fa-plus-circle fa-3x bottom-right btn"></i></a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+</body>
+
+<script>
+    function loadlocalstorage(email) {
+        console.log(email);
+        if (email == "") {
+            console.log("email empty");
+            return;
+        }
+        if (localStorage.getItem("cust_email") === null) {
+            localStorage.setItem("cust_email", email);
+        }
+
+    }
+
+</script>
+
+</html>
